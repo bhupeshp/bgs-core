@@ -36,6 +36,7 @@ public abstract class BackgroundService extends Service {
 	 */
 	private Boolean mServiceInitialised = false;
 	private Timer mTimer;
+	private Authenticator auth;
 	
 	private final Object mResultLock = new Object();
 	private JSONObject mLatestResult = null;
@@ -122,6 +123,8 @@ public abstract class BackgroundService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 	    super.onStartCommand(intent, flags, startId);
 	    Log.d(TAG, "onStartCommand run");
+	    
+	    auth = new Authenticator(this);
 
 	    initialiseService();
 	    return START_STICKY;  
